@@ -11,6 +11,7 @@ toggle.addEventListener('click',()=>{
     toggle.classList.toggle('dark-mode');
     search.style.backgroundColor='white';
     dropOptions.style.color = 'black';
+    
 const dropdo = document.querySelector('.dropdown');
 const controls = document.querySelector('.controls');
 dropdo.style.backgroundColor = 'white';
@@ -34,6 +35,7 @@ async function getCountries(){
 getCountries();
 
 function showCountry(data){
+    console.log(data)
     const country=document.createElement('div');
     country.classList.add('country');
     country.innerHTML = 
@@ -41,7 +43,7 @@ function showCountry(data){
     <img src= ${data.flag} alt="">
 </div>
 <div class="country-details">
-    <h5 class="countryName">${data.name}</h5>
+ <a href="detail.html?id=${data.name}"> <h5 class="countryName">${data.name}</h5></a>
     <p><strong>population:</strong>${data.population}</p>
     <p class="regionName"><strong>Region:</strong>${data.region}</p>
     <p><strong>Capital</strong>${data.capital}</p>
@@ -67,8 +69,8 @@ search.addEventListener('input', () => {
 regions.forEach((region) => {
     region.addEventListener('click', () => {
         const regionName = region.textContent;
-        const filter = Array.from(countries.getElementsByClassName('country'));
-        filter.forEach((country) => {
+        const filteredCountries = Array.from(countries.getElementsByClassName('country'));
+        filteredCountries.forEach((country) => {
             const regionElement = country.querySelector('.regionName');
             if (regionElement.textContent.includes(regionName)) {
                 country.style.display = 'block';
